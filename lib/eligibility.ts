@@ -2,7 +2,7 @@ import type { Category, Sex } from "./types";
 
 export type Modality = "outdoor" | "short-track";
 
-const COMMON_FIELD = ["LJ", "HJ", "TJ", "PV", "SP"];
+const COMMON_FIELD = ["LJ", "HJ", "TJ", "PV", "SP", "DT", "JT", "HT"];
 
 const OUTDOOR: Record<Category, string[]> = {
   U12: ["60m", "500m", "1000m", "2000m", "60mH", "LJ", "HJ", "TJ", "PV", "SP", "2000mRW", ...COMMON_FIELD],

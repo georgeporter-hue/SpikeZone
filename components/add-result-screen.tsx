@@ -29,6 +29,7 @@ import { cn } from '@/lib/utils'
 import type { Result } from '@/lib/types'
 import { getCategory } from '@/lib/category'
 import { isEventAllowed } from '@/lib/eligibility'
+import { getImplementWeight } from '@/lib/implements'
 
 type Kind = 'track' | 'field'
 type Modality = 'outdoor' | 'short-track'
@@ -87,6 +88,9 @@ export function AddResultScreen() {
 
   const athleteCategory = me.birthDate ? getCategory(me.birthDate) : me.category
   const eventsForKind = EVENTS.filter((e) => e.kind === kind && isEventAllowed(athleteCategory, me.sex, modality, e.id))
+
+  const implementId = event?.id === "SP" || event?.id === "DT" || event?.id === "JT" || event?.id === "HT" ? event.id : null
+  const implementWeight = implementId ? getImplementWeight(athleteCategory, me.sex, implementId) : null
 
   function validateDetails(): boolean {
     let ok = true
@@ -310,7 +314,14 @@ export function AddResultScreen() {
                 )}
               </Field>
 
-              {event.kind === 'track' && (
+              {implementWeight && (
+            <div className='rounded-xl border border-primary/20 bg-primary/5 px-4 py-3'>
+              <p className='text-xs text-muted-foreground'>Implemento oficial</p>
+              <p className='text-base font-semibold'>{implementWeight} kg</p>
+            </div>
+          )}
+
+          {event.kind === 'track' && (
                 <Field label="Wind (m/s)">
                   <div className="flex items-center gap-2">
                     <div className="relative flex-1">
