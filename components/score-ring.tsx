@@ -8,14 +8,14 @@ export function ScoreRing({
   className,
 }: {
   score: number
-  confidence: number
+  confidence?: number
   size?: number
   className?: string
 }) {
   const stroke = size * 0.08
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
-  const dash = (confidence / 100) * c
+  const dash = ((confidence ?? 100) / 100) * c
 
   return (
     <div className={cn('relative', className)} style={{ width: size, height: size }}>

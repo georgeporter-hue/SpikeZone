@@ -20,7 +20,7 @@ import {
 } from '@/lib/sample-data'
 import type { Result, VerificationStatus } from '@/lib/types'
 
-const STORAGE_KEY = 'spikezone.results.v1'
+const STORAGE_KEY = 'spikezone.results.v2'
 const SETTINGS_KEY = 'spikezone.settings.v1'
 
 export type CombinationMode = 'balanced' | 'verified-first' | 'latest'

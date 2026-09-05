@@ -89,10 +89,8 @@ export function HomeScreen() {
             <Skeleton className="mt-1 h-4 w-56" />
           ) : latest?.isPB ? (
             <p className="mt-1 text-pretty text-sm text-primary">
-              New PB detected: {latest.markLabel}
-              {latest.unit} in the {getEvent(latest.eventId)?.name}
-              {latest.status === 'pending' ? ', pending verification.' : '.'}
-            </p>
+              New PB detected: {latest.markLabel} {latest.unit} in the {getEvent(latest.eventId)?.name}.
+</p>
           ) : (
             <p className="mt-1 text-pretty text-sm text-muted-foreground">
               Log your next mark and keep the season rolling.
@@ -124,7 +122,7 @@ export function HomeScreen() {
                 {!ready ? (
                   <Skeleton className="size-[132px] rounded-full" />
                 ) : (
-                  <ScoreRing score={spike.score} confidence={spike.confidence} />
+                  <ScoreRing score={spike.score} />
                 )}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between">
@@ -136,12 +134,9 @@ export function HomeScreen() {
                   <div className="mt-2 space-y-2">
                     <div>
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">Confidence</span>
                         <span className="font-semibold text-primary">
-                          {spike.confidence}%
                         </span>
                       </div>
-                      <ProgressBar value={spike.confidence} className="mt-1" />
                     </div>
                     <p className="text-pretty text-xs text-muted-foreground">
                       Performance score based on your best results.

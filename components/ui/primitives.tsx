@@ -109,6 +109,7 @@ const RARITY: Record<Rarity, string> = {
   Rare: 'bg-chart-3/20 text-chart-3',
   Epic: 'bg-chart-4/20 text-chart-4',
   Legendary: 'bg-gold/20 text-gold',
+  Secret: 'bg-muted text-muted-foreground',
 }
 
 export function RarityTag({ rarity }: { rarity: Rarity }) {

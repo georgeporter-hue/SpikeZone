@@ -192,7 +192,7 @@ export const RESULTS: Result[] = [
   makeResult('lucia', 'F', '100m', 11.78, '11.78', 's', 0.4, '2025-07-18', 'Campeonato Regional', 'approved', 'ra-2025.pdf', false, false),
   makeResult('lucia', 'F', '100m', 11.62, '11.62', 's', -0.6, '2026-04-22', 'Control CA Sevilla', 'approved', 'ctrl-apr.pdf', false, false),
   makeResult('lucia', 'F', '100m', 11.54, '11.54', 's', 1.0, '2026-05-15', 'Meeting Cádiz', 'approved', 'cadiz.pdf', false, false),
-  makeResult('lucia', 'F', '100m', 11.45, '11.45', 's', 1.2, '2026-06-12', 'Gran Premio Sevilla', 'pending', 'gp-sevilla.pdf', true, true),
+  makeResult('lucia', 'F', '100m', 11.45, '11.45', 's', 1.2, '2026-06-12', 'Gran Premio Sevilla', 'approved', 'gp-sevilla.pdf', true, true),
   // Lucia — 200m
   makeResult('lucia', 'F', '200m', 23.9, '23.90', 's', 0.2, '2025-06-30', 'Campeonato Andalucía', 'approved', 'and-2025.pdf', false, false),
   makeResult('lucia', 'F', '200m', 23.71, '23.71', 's', 0.8, '2026-05-15', 'Meeting Cádiz', 'approved', 'cadiz-200.pdf', true, true),

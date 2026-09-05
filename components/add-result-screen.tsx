@@ -27,11 +27,14 @@ import { EVENTS, computeWaPoints, getEvent, parseMark } from '@/lib/events'
 import { CURRENT_ATHLETE_ID } from '@/lib/sample-data'
 import { cn } from '@/lib/utils'
 import type { Result } from '@/lib/types'
+import { getCategory } from '@/lib/category'
+import { isEventAllowed } from '@/lib/eligibility'
 
 type Kind = 'track' | 'field'
-type Step = 'kind' | 'event' | 'details' | 'publish' | 'review' | 'submitting' | 'done'
+type Modality = 'outdoor' | 'short-track'
+type Step = 'modality' | 'kind' | 'event' | 'details' | 'publish' | 'review' | 'submitting' | 'done'
 
-const STEP_ORDER: Step[] = ['kind', 'event', 'details', 'publish', 'review']
+const STEP_ORDER: Step[] = ['modality', 'kind', 'event', 'details', 'publish', 'review']
 
 const MAX_FILE_MB = 8
 const ACCEPTED = ['application/pdf', 'image/png', 'image/jpeg']
@@ -42,8 +45,9 @@ export function AddResultScreen() {
   const me = getAthlete(CURRENT_ATHLETE_ID)!
   const myResults = useMyResults()
 
-  const [step, setStep] = useState<Step>('kind')
+  const [step, setStep] = useState<Step>('modality')
   const [kind, setKind] = useState<Kind | null>(null)
+  const [modality, setModality] = useState<Modality>('outdoor')
   const [eventId, setEventId] = useState<string | null>(null)
   const [markRaw, setMarkRaw] = useState('')
   const [wind, setWind] = useState('')
@@ -81,7 +85,8 @@ export function AddResultScreen() {
     return { isPB, isSB }
   }, [event, parsed, myResults, date])
 
-  const eventsForKind = EVENTS.filter((e) => e.kind === kind)
+  const athleteCategory = me.birthDate ? getCategory(me.birthDate) : me.category
+  const eventsForKind = EVENTS.filter((e) => e.kind === kind && isEventAllowed(athleteCategory, me.sex, modality, e.id))
 
   function validateDetails(): boolean {
     let ok = true
@@ -178,7 +183,39 @@ export function AddResultScreen() {
       </div>
 
       <div className="px-4 py-5">
-        {step === 'kind' && (
+              {step === "modality" && (
+        <StepShell title="Which track?" hint="Choose the competition setting.">
+          <div className="grid grid-cols-2 gap-3">
+            {(["outdoor", "short-track"] as Modality[]).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => {
+                  setModality(m)
+                  setKind(null)
+                  setEventId(null)
+                  setStep("kind")
+                }}
+                className={cn(
+                  "rounded-2xl border p-4 text-left transition-colors",
+                  modality === m
+                    ? "border-primary bg-primary/10"
+                    : "border-border bg-card hover:bg-secondary/30",
+                )}
+              >
+                <p className="font-bold">
+                  {m === "outdoor" ? "Aire Libre" : "Short Track"}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {m === "outdoor" ? "Pista al aire libre" : "Pista cubierta"}
+                </p>
+              </button>
+            ))}
+          </div>
+        </StepShell>
+      )}
+
+{step === 'kind' && (
           <StepShell title="What did you compete in?" hint="Pick a discipline to start.">
             <div className="grid grid-cols-2 gap-3">
               {(['track', 'field'] as Kind[]).map((k) => (
