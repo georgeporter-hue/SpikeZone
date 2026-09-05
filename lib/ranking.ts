@@ -54,7 +54,7 @@ export function buildRanking(
   const entries: { athlete: Athlete; best: Result }[] = []
   for (const athlete of eligible) {
     let pool = results.filter(
-      (r) => r.athleteId === athlete.id && r.eventId === filters.eventId,
+      (r) => r.athleteId === athlete.id && r.eventId === filters.eventId && r.status === "approved" && r.isValid !== false,
     )
     if (filters.season !== 'All-time') {
       pool = pool.filter((r) => new Date(r.date).getFullYear() === Number(filters.season))
