@@ -22,6 +22,7 @@ export interface Athlete {
   id: string
   username: string
   fullName: string
+  birthDate?: string
   avatar: string
   category: Category
   sex: Sex
@@ -37,6 +38,7 @@ export interface Result {
   id: string
   athleteId: string
   eventId: string
+  modality?: 'outdoor' | 'short-track'
   /** Numeric mark used for comparison/sorting (seconds for track, metres for field) */
   markValue: number
   /** Human readable mark, e.g. "11.45" or "6.42" */
@@ -46,6 +48,7 @@ export interface Result {
   date: string
   competition: string
   status: VerificationStatus
+  isValid?: boolean
   fileUrl: string | null
   waPoints: number
   isPB: boolean

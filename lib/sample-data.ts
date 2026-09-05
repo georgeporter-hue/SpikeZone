@@ -44,6 +44,7 @@ export const ATHLETES: Athlete[] = [
     id: 'lucia',
     username: '@lucia_nav',
     fullName: 'Lucia Navarro',
+    birthDate: '2005-01-01',
     avatar: '/avatars/lucia.png',
     category: 'U23',
     sex: 'F',
